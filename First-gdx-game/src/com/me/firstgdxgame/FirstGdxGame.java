@@ -9,15 +9,24 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
 
 public class FirstGdxGame implements ApplicationListener {
+	/*
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
+	*/
+	Texture dropImage;
+	Texture bucketImage;
+	Sound dropSound;
+	Music rainMusic;
 	
 	@Override
-	public void create() {		
+	public void create() {
+		/*
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
@@ -33,25 +42,43 @@ public class FirstGdxGame implements ApplicationListener {
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		*/
+		// load the images for the droplet and the bucket, 48x48 pixels each
+		dropImage = new Texture(Gdx.files.internal("droplet.png"));
+		bucketImage = new Texture(Gdx.files.internal("bucket.png"));
+		
+		// load the drop sound effect and the rain backgroud "music"
+		dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
+		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
+		
+		// start the playback of the background music immediately
+		rainMusic.setLooping(true);
+		rainMusic.play();
+		
 	}
 
 	@Override
 	public void dispose() {
+		/*
 		batch.dispose();
 		texture.dispose();
+		*/
+		dropImage.dispose();
+		bucketImage.dispose();
 	}
 
 	@Override
 	public void render() {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
+		/*
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		sprite.draw(batch);
 		batch.end();
+		*/
 	}
-
+	
 	@Override
 	public void resize(int width, int height) {
 	}
@@ -63,4 +90,5 @@ public class FirstGdxGame implements ApplicationListener {
 	@Override
 	public void resume() {
 	}
+	
 }
